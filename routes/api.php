@@ -21,7 +21,7 @@ Route::post('/register',[AuthController::class, 'register']);
 Route::post('/login',[AuthController::class, 'login']);
 
 Route::middleware('auth:api')->group(function () {
-        Route::post('/reserva/{id}', 'API\ReservaController@store');
+        Route::post('/reserva', 'API\ReservaController@store');
         //Route::post('groups/{id}/join', 'GroupController@join');
 
         //Route::middleware('group-member')->group(function () {

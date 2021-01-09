@@ -12,7 +12,7 @@ class Servicio extends Model
     ];
     use HasFactory;
 
-    public function Grupos()
+    public function grupos()
     {
         return $this->belongsTo(Grupo::class);
     }

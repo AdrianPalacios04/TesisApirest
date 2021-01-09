@@ -45,13 +45,18 @@ class ReservaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, $id)
+    public function store(Request $request)
     {
-        $reserva = Reserva::find($id);
-        $servicioid = $request->get('servicio_id');
-        $reserva->services()->attach($servicioid);
-        return 'success';
+        $request->merge(['user_id' => Auth::id()]);
 
+        /** @var Reserva $reserva */
+        $reserva = Reserva::create($request->all());
+
+        $servicioId = $request->get('servicio_id');
+        $reserva->services()->sync($servicioId);
+        $reserva->load('services');
+
+        return $reserva;
     }
 
     /**
